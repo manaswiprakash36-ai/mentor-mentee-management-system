@@ -16,4 +16,16 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1000, // raise warning threshold to 1MB
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split vendor libraries into their own chunk
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
+  },
 })
