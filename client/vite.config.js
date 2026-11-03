@@ -17,13 +17,13 @@ export default defineConfig({
     },
   },
   build: {
-    chunkSizeWarningLimit: 1000, // raise warning threshold to 1MB
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Split vendor libraries into their own chunk
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          icons: ['lucide-react'],
+        // Vite 8 (rolldown) requires manualChunks as a function, not an object
+        manualChunks(id) {
+          if (id.includes('lucide-react')) return 'icons';
+          if (id.includes('react-router-dom') || id.includes('react-dom') || id.includes('/react/')) return 'vendor';
         },
       },
     },
