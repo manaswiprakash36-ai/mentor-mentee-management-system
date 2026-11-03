@@ -18,14 +18,5 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 1000,
-    rollupOptions: {
-      output: {
-        // Vite 8 (rolldown) requires manualChunks as a function, not an object
-        manualChunks(id) {
-          if (id.includes('lucide-react')) return 'icons';
-          if (id.includes('react-router-dom') || id.includes('react-dom') || id.includes('/react/')) return 'vendor';
-        },
-      },
-    },
   },
 })
